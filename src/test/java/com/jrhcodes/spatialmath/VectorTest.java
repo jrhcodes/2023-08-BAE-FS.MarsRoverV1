@@ -34,7 +34,7 @@ public class VectorTest {
     @ParameterizedTest
     @CsvFileSource(resources = "TestVectorValues.csv", numLinesToSkip = 2)
     public void applyTest(int x, int y, int vx, int vy, int rx, int ry){
-        Point point = new Vector(vx, vy).apply(new Point(x, y));
+        Point point = new Vector(vx, vy).applyCopy(new Point(x, y));
         assertEquals(point.getX(), rx);
         assertEquals(point.getY(), ry);
     }

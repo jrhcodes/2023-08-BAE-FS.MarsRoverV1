@@ -5,7 +5,7 @@ public class Vector extends Point {
         super(x, y);
     }
 
-    public Point apply(Point p) {
-        return new Point(this.getX()+p.getX(), this.getY()+p.getY());
+    public Point applyCopy(Point p) {
+        return new Point(this.getX() + p.getX(), this.getY() + p.getY());
     }
 }

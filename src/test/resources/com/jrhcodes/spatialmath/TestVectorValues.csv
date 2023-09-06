@@ -1,5 +1,5 @@
 TEST VECTOR VALUES
-X,Y, VX, VY, RX = X+VX, RY = Y + RY
+X,Y, VX, VY, RX = X+VX, RY = Y+RY
 0, 0, 0, 1, 0, 1
 0, 0, 1, 0, 1, 0
 0, 0, -1, 0, -1, 0

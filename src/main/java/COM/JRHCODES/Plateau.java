@@ -3,10 +3,10 @@ package com.jrhcodes;
 import com.jrhcodes.spatialmath.Point;
 
 public class Plateau {
-    private final Point topRight ;
     private static final Point origin = new Point(0, 0);
+    private final Point topRight;
 
-    public Plateau( Point topRight ){
+    public Plateau(Point topRight) {
         this.topRight = topRight;
     }
 
