@@ -1,4 +1,4 @@
-package COM.JRHCODES;
+package com.jrhcodes;
 
 public class Main {
     public static void main(String[] args) {

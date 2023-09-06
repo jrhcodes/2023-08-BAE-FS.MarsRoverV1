@@ -1,4 +1,4 @@
-package COM.JRHCODES;
+package com.jrhcodes;
 
 public class MissionFileReader {/*
     static public Mission readMissionFile(File file) {

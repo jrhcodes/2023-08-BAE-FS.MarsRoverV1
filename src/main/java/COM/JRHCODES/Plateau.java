@@ -1,4 +1,4 @@
-package COM.JRHCODES;
+package com.jrhcodes;
 
 import com.jrhcodes.spatialmath.Point;
 
