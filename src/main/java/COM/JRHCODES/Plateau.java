@@ -6,8 +6,8 @@ public class Plateau {
     private static final Point origin = new Point(0, 0);
     private final Point topRight;
 
-    public Plateau(Point topRight) {
-        this.topRight = topRight;
+    public Plateau(int topRightX, int topRightY) {
+        this.topRight = new Point(topRightX, topRightY);
     }
 
     public boolean contains(Point point) {

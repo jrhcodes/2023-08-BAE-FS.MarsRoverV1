@@ -20,14 +20,15 @@ public class RoverTest {
     @ParameterizedTest
     @CsvFileSource(resources = "RoverPathTest.csv", numLinesToSkip = 2)
     public void testRoverPathX(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
-        Rover rover = new Rover( initX, initY, initDir, commands);
+        Rover rover = new Rover(initX, initY, initDir, commands);
         Pose finalPose = rover.getPose();
         assertEquals(finalX, finalPose.getX());
     }
+
     @ParameterizedTest
     @CsvFileSource(resources = "RoverPathTest.csv", numLinesToSkip = 2)
     public void testRoverPathY(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
-        Rover rover = new Rover( initX, initY, initDir, commands);
+        Rover rover = new Rover(initX, initY, initDir, commands);
         Pose finalPose = rover.getPose();
         assertEquals(finalY, finalPose.getY());
     }
@@ -35,7 +36,7 @@ public class RoverTest {
     @ParameterizedTest
     @CsvFileSource(resources = "RoverPathTest.csv", numLinesToSkip = 2)
     public void testRoverPathDir(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
-        Rover rover = new Rover( initX, initY, initDir, commands);
+        Rover rover = new Rover(initX, initY, initDir, commands);
         Pose finalPose = rover.getPose();
         assertEquals(finalDir, finalPose.getDirection());
     }

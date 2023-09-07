@@ -5,11 +5,10 @@ import com.jrhcodes.spatialmath.Point;
 import com.jrhcodes.spatialmath.Pose;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Rover {
 
-    static final String commandSet = "LRF";
+    static final String commandSet = "LRM";
     String commandString;
     Pose pose;
     ArrayList<Pose> path;
@@ -28,10 +27,10 @@ public class Rover {
         return commands.chars().allMatch(ch -> commandSet.indexOf(ch) != -1);
     }
 
-    public void  executeMission() {
+    public String executeMission() {
 
         String[] commands = commandString.split("");
-        path = new ArrayList<>(1+commands.length);
+        path = new ArrayList<>(1 + commands.length);
         path.add(this.pose);
 
         for (String command : commands) {
@@ -46,6 +45,8 @@ public class Rover {
             path.add(this.pose);
         }
 
+        return String.format("%d %d %s", pose.getX(), pose.getY(), pose.getDirection().name());
+
     }
 
     @Override
@@ -54,7 +55,7 @@ public class Rover {
         return "%d %d %s".formatted(position.getX(), position.getY(), pose.getDirection().name());
     }
 
-    boolean pathValid(Plateau plateau) {
+    boolean pathInBounds(Plateau plateau) {
         return path.stream().allMatch(pose -> plateau.contains(pose.getPosition()));
     }
 

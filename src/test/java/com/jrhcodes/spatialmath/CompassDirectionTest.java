@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CompassDirectionTest {
     @ParameterizedTest
     @CsvFileSource(resources = "TestCompassDirectionValues.csv", numLinesToSkip = 2)
-    public void getVectorTest(CompassDirection compassDirection, int x, int y, int sx, int sy, int rx, int ry){
+    public void getVectorTest(CompassDirection compassDirection, int x, int y, int sx, int sy, int rx, int ry) {
         assertEquals(compassDirection.getVector().getX(), x);
         assertEquals(compassDirection.getVector().getY(), y);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "TestCompassDirectionValues.csv", numLinesToSkip = 2)
-    public void moveTest(CompassDirection compassDirection, int x, int y, int sx, int sy, int rx, int ry){
+    public void moveTest(CompassDirection compassDirection, int x, int y, int sx, int sy, int rx, int ry) {
         Point applied = compassDirection.moveCopy(new Point(sx, sy));
         assertEquals(applied.getX(), rx);
         assertEquals(applied.getY(), ry);
