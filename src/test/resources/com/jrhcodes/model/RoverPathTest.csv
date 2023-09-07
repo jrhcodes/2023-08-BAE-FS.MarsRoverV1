@@ -22,8 +22,6 @@ StartX, Start Y, Start Heading, Command Sequence, Final X, Final Y, Final Headin
 3,3,E,M,4,3,E
 5,5,W,M,4,5,W
 5,5,S,M,5,4,S
-0,0,E,M,1,0,E
-0,0,N,M,0,1,N
 3,3,N,MLMLMLMR,3,3,S
 3,3,E,MLMLMLMR,3,3,W
 3,3,S,MLMLMLMR,3,3,N

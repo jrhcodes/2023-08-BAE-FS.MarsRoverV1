@@ -1,4 +1,4 @@
-package com.jrhcodes;
+package com.jrhcodes.model;
 
 import com.jrhcodes.spatialmath.CompassDirection;
 import com.jrhcodes.spatialmath.Point;
@@ -46,7 +46,6 @@ public class Rover {
         }
 
         return String.format("%d %d %s", pose.getX(), pose.getY(), pose.getDirection().name());
-
     }
 
     @Override
@@ -55,11 +54,16 @@ public class Rover {
         return "%d %d %s".formatted(position.getX(), position.getY(), pose.getDirection().name());
     }
 
-    boolean pathInBounds(Plateau plateau) {
+    public boolean pathStaysWithinPlateau(Plateau plateau) {
         return path.stream().allMatch(pose -> plateau.contains(pose.getPosition()));
     }
 
     public ArrayList<Pose> getPath() {
         return path;
     }
+
+    public String getCommandSequence() {
+        return commandString;
+    }
+
 }
