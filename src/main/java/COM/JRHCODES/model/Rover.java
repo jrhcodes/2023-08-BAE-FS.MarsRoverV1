@@ -4,14 +4,14 @@ import com.jrhcodes.spatialmath.CompassDirection;
 import com.jrhcodes.spatialmath.Point;
 import com.jrhcodes.spatialmath.Pose;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Rover {
 
     static final String commandSet = "LRM";
     String commandString;
     Pose pose;
-    ArrayList<Pose> path;
+    Pose[] path;
 
     public Rover(int x, int y, CompassDirection compassDirection, String commands) {
         this.pose = new Pose(new Point(x, y), compassDirection);
@@ -30,11 +30,12 @@ public class Rover {
     public String executeMission() {
 
         String[] commands = commandString.split("");
-        path = new ArrayList<>(1 + commands.length);
-        path.add(this.pose);
+        path = new Pose[commands.length+1];
+        path[0] = this.pose;
 
-        for (String command : commands) {
-            switch (command) {
+
+        for (int i = 0; i<commands.length; i++) {
+            switch (commands[i]) {
                 case "L" -> this.pose = new Pose(this.pose.getPosition(), this.pose.getDirection().leftOf());
                 case "R" -> this.pose = new Pose(this.pose.getPosition(), this.pose.getDirection().rightOf());
                 case "M" ->
@@ -42,10 +43,10 @@ public class Rover {
                 default ->
                         throw new IllegalArgumentException("Unknown command in command sequence:'%s'".formatted(commandString));
             }
-            path.add(this.pose);
+            path[i+1] = this.pose;
         }
 
-        return String.format("%d %d %s", pose.getX(), pose.getY(), pose.getDirection().name());
+        return String.format("%d %d %s", this.pose.getX(), this.pose.getY(), this.pose.getDirection().name());
     }
 
     @Override
@@ -55,11 +56,11 @@ public class Rover {
     }
 
     public boolean pathStaysWithinPlateau(Plateau plateau) {
-        return path.stream().allMatch(pose -> plateau.contains(pose.getPosition()));
+        return Arrays.stream(this.path).allMatch(pose -> plateau.contains(pose.getPosition()));
     }
 
-    public ArrayList<Pose> getPath() {
-        return path;
+    public Pose[] getPath() {
+        return this.path;
     }
 
     public String getCommandSequence() {

@@ -10,6 +10,10 @@ public class Plateau {
         this.topRight = new Point(topRightX, topRightY);
     }
 
+    public Point getTopRight() {
+        return this.topRight;
+    }
+
     public boolean contains(Point point) {
         return point.isBoundBy(origin, topRight);
     }
