@@ -1,5 +1,5 @@
 DIRECTION TEST FILE
-ORDINAL, DX, DY, SX, SY, RX = SX+DX, RY=SY+DY
+ORDINAL, DX, DY, StartX, StartY, ResultX = SX+DX, ResultY=SY+DY
 N,0,1, 1, 1, 1, 2
 E,1,0, 1, 1, 2, 1
 S,0,-1, 1, 1, 1, 0

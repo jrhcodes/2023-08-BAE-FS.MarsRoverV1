@@ -82,13 +82,13 @@ Contains classes to assist with storing coordinates, directional and vector math
 - handles ordered pairs in the form (in x, int y)
 
 #### Pose
-- combines a CompassFirection and a Point to give a pose
+- combines a CompassDirection and a Point to give a pose
 
 #### Vector
 - derived from the Point class
 
 ### com.jrhcode.swingutils
-Includes 1 class which is derived from the swing JTextArea, but adds a printf functin - to pass formatted strings into the text area and a clear function, which clears it.
+Includes the class JTextAreaWithPrintf which is derived from the swing JTextArea, but adds a printf function - to pass formatted strings into the text area and a clear function, which clears it.
 
 ## src/test
 This contains two folders: java - which contains source code for unit tests and resources which contain the associated data.
@@ -96,3 +96,74 @@ This contains two folders: java - which contains source code for unit tests and 
 - under java folder: this contains source for the test classes for the classes in the same package under src/main/java 
 - under resources folder: this contains the data files used in tests
 - The first two lines of each data file are comments and give info about the fields used to test.
+
+### in the resource folder:
+
+#### com.jrhcodes.model:
+
+#### RoverNegativePathTest.csv
+Contains data to test rover pathing, including negative values. 
+- The first 2 lines of the file are comments
+- Other lines give a sequence of comma delimited values as follows:
+  - StartX, StartY, StartHeading, CommandSequence, FinalX, FinalY, FinalHeading
+      - StartX, StartY, StartHeading give the initial location and heading of the rover. 
+      - CommandSequence - is a sequence of characters (L/R/M) giving the command sequence for the rover to follow.
+      - FinalX, FinalY, FinalHeading give the expected final position and direction of the rover.
+- Each line is a separate test case.
+
+#### RoverPathTest.csv
+Has the same format as RoverNegativePathTest.csv except that it contains only positive path values.
+
+Cases for these tests were chosen as follows:
+- Command Sequences which didn't move the rover, just rotated it.
+- Command Sequences which returned the rover to its original position.
+- Command Sequences which both moved the rover and changed its heading.
+- Command Sequences which kept the rover within bounds of both a 1x1 and 10x10 plateau.
+
+### com.jrhcodes.spatialmath:
+#### TestCompassDirectionValues
+Contains the vector expected for each compass ordinal, and some test data - a start point and the point you'd expect to end up moving in the direction from that start point
+#### TestPointValues
+Contains a series of ordered pairs with which to test the Point class constructors and their associated accessor functions.
+#### TestVectorValues
+Contains a series of coordinates, vector x and y values and the result of applying the vector to the ordered pair. 
+
+# Future expansions:
+## give the Plateaus class a height map and obstacles
+- for an n x m Plateau, there would be an n x m array, each element (x,y) showing the relative height of the location.
+- where the difference in heights between two locations is above a threshold value, a rover would not be able to traverse the terrain between the two and the mission would fail.
+## fuel cells
+- each order processed by a rover would consume different amounts of energy from the rover's battery. 
+- The rover could pause and charge, requiring a new command "C". THe rover does not move but it's batteries recharge.
+- Suggested energy use:
+  - moving horizontally: 2 energy
+  - moving up or down a slope: 2 energy + 1 per different in height between start location and the next step.
+  - rotate left or right: 1 energy.
+  - hold and charge: + 20 energy.
+## new command types
+- new mission related command types could be added
+- e.g. take photo, collect sample
+## new vehicle types
+- new types of vehicle could be created by either extending the rover class or creating an interface other vehicle types could include
+- e.g. a "Copter" class. 
+  - smaller battery than the rover and so must land to recharge, frequently.
+  - is unhindered by gradients and can pass over obstacles. 
+  - It would not collide with rovers or charging copters whilst airborne. 
+  - When it recharges it gains only 10 energy due to smaller solar panels.
+  - it has no heading and moves in any direction, N, S, E, W from its current position.
+## route finding
+- adding functionality to the app to find the best route for a set of vehicles to take on the surface.
+- each vehicle would have a destination toward which they would head
+- routes could be optimised in terms of time taken or fuel usage
+- extensions to the route finding could add the ability to give each vehicle multiple waypoints, which they must visit to complete their mission
+- if orders such as take photo or collect sample were added to vehicle capabilities, orders at the various waypoints could be specified - e.g. collect a sample at 2,3
+
+
+# Acknowledgements
+I'd like to thank Tech Returners for their assistance on the course and especially Simon Morgan and Chris Ward, course tutors for the Java section of the course. 
+
+# Appendix
+You can see my initial class diagram, below.
+![Class Diagram](https://i.imgur.com/36w3aYy.jpg)
+
+The original test schedule and design document is [here](https://docs.google.com/document/d/14nbPuLkE97libjRZ2grYHXHp-Q2SPAJHYxB_BC8P7tk/edit?usp=sharing).

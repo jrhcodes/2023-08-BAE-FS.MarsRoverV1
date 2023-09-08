@@ -1,5 +1,5 @@
 ROVER PATHING TEST FILE
-StartX, Start Y, Start Heading, Command Sequence, Final X, Final Y, Final Heading
+StartX, StartY, StartHeading, CommandSequence, FinalX, FinalY, FinalHeading
 0,0,N,L,0,0,W
 0,0,W,L,0,0,S
 0,0,S,L,0,0,E
