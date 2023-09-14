@@ -27,14 +27,26 @@ public class Rover {
         return commands.chars().allMatch(ch -> commandSet.indexOf(ch) != -1);
     }
 
+    public Point getPosition(int step) {
+        if (step < path.length) {
+            return path[step].getPosition();
+        } else {
+            return pose.getPosition();
+        }
+    }
+
+    public Point getCurrentPosition() {
+        return pose.getPosition();
+    }
+
     public String executeMission() {
 
         String[] commands = commandString.split("");
-        path = new Pose[commands.length+1];
+        path = new Pose[commands.length + 1];
         path[0] = this.pose;
 
 
-        for (int i = 0; i<commands.length; i++) {
+        for (int i = 0; i < commands.length; i++) {
             switch (commands[i]) {
                 case "L" -> this.pose = new Pose(this.pose.getPosition(), this.pose.getDirection().leftOf());
                 case "R" -> this.pose = new Pose(this.pose.getPosition(), this.pose.getDirection().rightOf());
@@ -43,7 +55,7 @@ public class Rover {
                 default ->
                         throw new IllegalArgumentException("Unknown command in command sequence:'%s'".formatted(commandString));
             }
-            path[i+1] = this.pose;
+            path[i + 1] = this.pose;
         }
 
         return String.format("%d %d %s", this.pose.getX(), this.pose.getY(), this.pose.getDirection().name());
@@ -67,4 +79,20 @@ public class Rover {
         return commandString;
     }
 
+    public boolean hasCollidedWith(Rover otherRover, int step) {
+        Point roversPosition = getPosition(step);
+        Point otherRoversPosition = otherRover.getPosition(step);
+
+        if (roversPosition.equals(otherRoversPosition)) {
+            return true;
+        } else if (step > 0 && step < path.length && step < otherRover.path.length ) {
+            Point theRoversPenultimatePosition = getPosition(step - 1);
+            Point theOtherRoversPenultimatePosition = otherRover.getPosition(step - 1);
+
+            return theOtherRoversPenultimatePosition.equals(roversPosition)
+                    && theRoversPenultimatePosition.equals(otherRoversPosition);
+        }
+        return false;
+
+    }
 }

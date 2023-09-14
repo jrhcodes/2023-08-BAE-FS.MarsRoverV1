@@ -78,6 +78,12 @@ public class MarsRoverApp {
 
         executeButton.setEnabled(false);
         textArea.setText(null);
+        if (missionTablePane != null) {
+            frame.remove(missionTablePane);
+            missionTablePane = null;
+        };
+
+        frame.repaint();
 
         JFileChooser fileChooser = new JFileChooser();
 
@@ -142,10 +148,10 @@ public class MarsRoverApp {
         MarsMission marsMission = new MarsMission(new Plateau(plateauX, plateauY), numberOfRovers);
 
         for (int i = 0; i < numberOfRovers; i++) {
-            final String[] firstLineOfData = fileLines[i * 2 + 1].split(" ");
-            final int roverX = Integer.parseInt(firstLineOfData[0]);
-            final int roverY = Integer.parseInt(firstLineOfData[1]);
-            final CompassDirection heading = CompassDirection.valueOf(firstLineOfData[2]);
+            final String[] firstLineOfBlock = fileLines[i * 2 + 1].split(" ");
+            final int roverX = Integer.parseInt(firstLineOfBlock[0]);
+            final int roverY = Integer.parseInt(firstLineOfBlock[1]);
+            final CompassDirection heading = CompassDirection.valueOf(firstLineOfBlock[2]);
             final String commands = fileLines[i * 2 + 2];
             marsMission.addRover(new Rover(roverX, roverY, heading, commands), i);
         }
@@ -199,6 +205,7 @@ public class MarsRoverApp {
         JTable table = new JTable(model);
 
         table.setVisible(true);
+        table.setFont(new Font("Monospaced.ttf", Font.PLAIN, 12));
         // Create a JScrollPane to hold the table
         missionTablePane = new JScrollPane(table);
 
@@ -206,10 +213,12 @@ public class MarsRoverApp {
         frame.add(missionTablePane, BorderLayout.CENTER);
 
         final String[] rowData = new String[numberOfRovers+1];
-
         rowData[0] = String.valueOf(0);
 
+
+
         for (int roverIndex = 0; roverIndex< numberOfRovers; roverIndex++) {
+
 
             final Rover rover = marsMission.getRover(roverIndex);
             final Pose[] path = rover.getPath();
@@ -220,12 +229,15 @@ public class MarsRoverApp {
         }
 
         model.addRow(rowData);
+        boolean roverCollision = false;
+        boolean roverLeftPlateau = false;
 
         int longestPath = marsMission.findLongestRoverPath();
+        boolean missionFailed = false;
 
-        for (int step = 0; step < longestPath-1; step++) {
+        for (int step = 1; step < longestPath; step++) {
 
-            rowData[0] = String.valueOf(step+1);
+            rowData[0] = String.valueOf(step);
 
             for (int roverIndex = 0; roverIndex < numberOfRovers; roverIndex++) {
 
@@ -234,34 +246,39 @@ public class MarsRoverApp {
                 final int tableColumn = roverIndex + 1;
 
 
-                if (step < path.length-1) {
-                    final Pose pose = path[step+1];
+                if (step < path.length) {
+                    final Pose pose = path[step];
+
+                    boolean roverCollided = marsMission.isCollisionAtStep(roverIndex, step);
+
+                    String formatString = roverCollided ?
+                            "%c->(%3d, %3d)%s **Collision** %s": "%c->(%3d, %3d)%s %s";
+
+                    boolean roverIsOutOfBounds = marsMission.getPlateau().contains(pose.getPosition());
+                    String outofBoundsString = roverIsOutOfBounds ? "" : "**Out of Bounds**";
+
                     rowData[tableColumn] =
-                            String.format("%c->(%3d, %3d)%s", rover.getCommandSequence().charAt(step),
-                                    pose.getX(), pose.getY(), pose.getDirection().name());
+                            String.format(formatString, rover.getCommandSequence().charAt(step-1),
+                                    pose.getX(), pose.getY(), pose.getDirection().name(), outofBoundsString);
 
+                    missionFailed = missionFailed || !roverIsOutOfBounds || !roverCollided;
+
+                } else if(step == path.length ) {
+                    rowData[tableColumn] =
+                            "Orders complete.";
                 } else {
-                    rowData[tableColumn] ="-";
-
+                    rowData[tableColumn] = null;
                 }
 
-
             }
-
-
             model.addRow(rowData);
 
-            boolean roverCollision = false;
-            boolean roverLeftPlateau = false;
-
-            if (roverLeftPlateau) {
-                textArea.printf("MISSION FAILED: OUT OF BOUNDS. Rover left the plateau.\n");
-            }
-            if (roverCollision) {
-                textArea.printf("MISSION FAILED: COLLISION. Rover collided with another rover!\n");
-            }
-
         }
+
+        if (missionFailed) {
+            textArea.printf("*** MISSION FAILED! ***.\n");
+        }
+
         frame.setVisible(true);
 
 
@@ -280,6 +297,7 @@ public class MarsRoverApp {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(frame, "Error parsing data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.getCause();
         }
 
     }
