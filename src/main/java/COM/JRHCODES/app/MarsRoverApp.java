@@ -11,40 +11,30 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import static javax.swing.SwingUtilities.invokeLater;
+
 public class MarsRoverApp {
     private final JFrame frame;
     private final JButton executeButton;
     private final JTextAreaWithPrintf textArea;
-    private JScrollPane missionTablePane = null;
     String fileBuffer = null;
+    private JScrollPane missionTablePane = null;
 
     public MarsRoverApp() {
-
-
         frame = new JFrame("Mars Rover App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton openButton = new JButton("Select File");
-        openButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fileBuffer = openFile();
-            }
-        });
+        openButton.addActionListener(e -> fileBuffer = openFile());
         openButton.setPreferredSize(new Dimension(100, 30));
 
         executeButton = new JButton("Execute Mission");
-        executeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                executeMission(fileBuffer);
-            }
-        });
+        executeButton.addActionListener(e -> executeMission(fileBuffer));
         executeButton.setEnabled(false);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -67,11 +57,7 @@ public class MarsRoverApp {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new MarsRoverApp();
-            }
-        });
+        invokeLater(MarsRoverApp::new);
     }
 
     private String openFile() {
@@ -81,7 +67,7 @@ public class MarsRoverApp {
         if (missionTablePane != null) {
             frame.remove(missionTablePane);
             missionTablePane = null;
-        };
+        }
 
         frame.repaint();
 
@@ -111,8 +97,8 @@ public class MarsRoverApp {
 
             try {
                 FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                byte[] data = new byte[(int) selectedFile.length()];
-                fileInputStream.read(data);
+                byte[] data = new byte[(int) selectedFile.length()+1];
+                int read = fileInputStream.read(data);
                 fileInputStream.close();
 
                 buffer = new String(data, StandardCharsets.UTF_8);
@@ -124,8 +110,6 @@ public class MarsRoverApp {
                     frame.remove(missionTablePane);
                 }
                 executeButton.setEnabled(true);
-
-
 
             } catch (IOException | NumberFormatException e) {
                 JOptionPane.showMessageDialog(frame, "Error reading the file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -196,7 +180,7 @@ public class MarsRoverApp {
 
         columnNames[0] = "Step";
         for (int i = 0; i < numberOfRovers; i++) {
-            columnNames[i+1] = "Rover" + i;
+            columnNames[i + 1] = "Rover" + i;
         }
 
         DefaultTableModel model = new DefaultTableModel(emptyTable, columnNames);
@@ -212,12 +196,11 @@ public class MarsRoverApp {
         // Add the JScrollPane to the JFrame
         frame.add(missionTablePane, BorderLayout.CENTER);
 
-        final String[] rowData = new String[numberOfRovers+1];
+        final String[] rowData = new String[numberOfRovers + 1];
         rowData[0] = String.valueOf(0);
 
 
-
-        for (int roverIndex = 0; roverIndex< numberOfRovers; roverIndex++) {
+        for (int roverIndex = 0; roverIndex < numberOfRovers; roverIndex++) {
 
 
             final Rover rover = marsMission.getRover(roverIndex);
@@ -229,8 +212,6 @@ public class MarsRoverApp {
         }
 
         model.addRow(rowData);
-        boolean roverCollision = false;
-        boolean roverLeftPlateau = false;
 
         int longestPath = marsMission.findLongestRoverPath();
         boolean missionFailed = false;
@@ -252,18 +233,18 @@ public class MarsRoverApp {
                     boolean roverCollided = marsMission.isCollisionAtStep(roverIndex, step);
 
                     String formatString = roverCollided ?
-                            "%c->(%3d, %3d)%s **Collision** %s": "%c->(%3d, %3d)%s %s";
+                            "%c->(%3d, %3d)%s **Collision** %s" : "%c->(%3d, %3d)%s %s";
 
                     boolean roverIsOutOfBounds = marsMission.getPlateau().contains(pose.getPosition());
                     String outofBoundsString = roverIsOutOfBounds ? "" : "**Out of Bounds**";
 
                     rowData[tableColumn] =
-                            String.format(formatString, rover.getCommandSequence().charAt(step-1),
+                            String.format(formatString, rover.getCommandSequence().charAt(step - 1),
                                     pose.getX(), pose.getY(), pose.getDirection().name(), outofBoundsString);
 
                     missionFailed = missionFailed || !roverIsOutOfBounds || !roverCollided;
 
-                } else if(step == path.length ) {
+                } else if (step == path.length) {
                     rowData[tableColumn] =
                             "Orders complete.";
                 } else {

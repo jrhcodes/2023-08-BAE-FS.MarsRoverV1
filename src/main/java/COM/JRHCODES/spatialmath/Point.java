@@ -17,9 +17,9 @@ public class Point {
         return y;
     }
 
-    public boolean equals(Point point) {
-        if (this == point) return true;
-        return x == point.x && y == point.y;
+    @Override
+    public boolean equals(Object object) {
+        return this == object || (object instanceof Point point && x == point.x && y == point.y);
     }
 
     public boolean isBoundBy(Point bottomLeft, Point topRight) {
