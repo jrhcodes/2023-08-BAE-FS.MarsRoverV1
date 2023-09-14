@@ -35,11 +35,7 @@ public class Rover {
         }
     }
 
-    public Point getCurrentPosition() {
-        return pose.getPosition();
-    }
-
-    public String executeMission() {
+    public void executeMission() {
 
         String[] commands = commandString.split("");
         path = new Pose[commands.length + 1];
@@ -58,7 +54,8 @@ public class Rover {
             path[i + 1] = this.pose;
         }
 
-        return String.format("%d %d %s", this.pose.getX(), this.pose.getY(), this.pose.getDirection().name());
+        this.pose.getX();
+        this.pose.getY();
     }
 
     @Override
@@ -85,7 +82,7 @@ public class Rover {
 
         if (roversPosition.equals(otherRoversPosition)) {
             return true;
-        } else if (step > 0 && step < path.length && step < otherRover.path.length ) {
+        } else if (step > 0 && step < path.length && step < otherRover.path.length) {
             Point theRoversPenultimatePosition = getPosition(step - 1);
             Point theOtherRoversPenultimatePosition = otherRover.getPosition(step - 1);
 

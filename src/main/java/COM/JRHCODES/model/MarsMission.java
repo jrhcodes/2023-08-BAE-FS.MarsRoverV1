@@ -32,7 +32,7 @@ public class MarsMission {
 
         for (int otherRoverIndex = 0; otherRoverIndex < rovers.length; otherRoverIndex++) {
             if (otherRoverIndex != roverIndex && theRover.hasCollidedWith(getRover(otherRoverIndex), step)) {
-                    return true;
+                return true;
             }
         }
         return false;
