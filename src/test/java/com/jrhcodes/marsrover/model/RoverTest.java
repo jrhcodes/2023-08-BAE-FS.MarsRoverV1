@@ -65,7 +65,6 @@ public class RoverTest {
     @CsvFileSource(resources = "RoverNegativePathTest.csv", numLinesToSkip = 2)
     public void testRoverPathStaysWithin10x10PlateauNegativePath(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
         Rover rover = new Rover(initX, initY, initDir, commands);
-        Pose finalPose = rover.getPose();
         assertFalse(rover.pathStaysWithinPlateau(new Plateau(10, 10)));
     }
 }
