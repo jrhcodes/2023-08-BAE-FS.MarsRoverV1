@@ -69,10 +69,10 @@ Contains classes which directly model aspects of the specification, used by Mars
 #### MarsMission 
 - collects together all the rovers and the plateau definition for current the mission.
 
-### com.jrhcodes.scratch
+### com.jrhcodes.marsrover..scratch
 - Junk/temporary code - ignore.
 
-### com.jrhcode.spatialmath
+### com.jrhcode.marsrover.spatialmath
 Contains classes to assist with storing coordinates, directional and vector maths.
 
 #### CompassDirection
@@ -87,7 +87,7 @@ Contains classes to assist with storing coordinates, directional and vector math
 #### Vector
 - derived from the Point class
 
-### com.jrhcode.swingutils
+### com.jrhcode.marsrover.swingutils
 Includes the class JTextAreaWithPrintf which is derived from the swing JTextArea, but adds a printf function - to pass formatted strings into the text area and a clear function, which clears it.
 
 ## src/test
@@ -99,7 +99,7 @@ This contains two folders: java - which contains source code for unit tests and 
 
 ### in the resource folder:
 
-#### com.jrhcodes.model:
+#### com.jrhcodes.marsrover.model:
 
 #### RoverNegativePathTest.csv
 Contains data to test rover pathing, including negative values. 
@@ -120,7 +120,13 @@ Cases for these tests were chosen as follows:
 - Command Sequences which both moved the rover and changed its heading.
 - Command Sequences which kept the rover within bounds of both a 1x1 and 10x10 plateau.
 
-### com.jrhcodes.spatialmath:
+### RoverCommendSetTest
+Test rover command sequence data.
+
+### RoverCommendTest
+Test individual command values
+
+### com.jrhcodes.marsrover.spatialmath:
 #### TestCompassDirectionValues
 Contains the vector expected for each compass ordinal, and some test data - a start point and the point you'd expect to end up moving in the direction from that start point
 #### TestPointValues
@@ -130,6 +136,15 @@ Contains a series of coordinates, vector x and y values and the result of applyi
 
 # What I didn't have time for
 - Refactoring the may app into a main app class and utility classes for most side functionality.
+  - I have created shells for these in the project folder:
+    -   MarsRoverAppUI: into which I would move all the swing stuff - possibly migrate it to JavaFX. 
+      - I have never created a GUI project in Java and found Swing first - then JavaFX. I tried installing JavaFX and then decided I had already gone too far with Swing, so left it as-is.
+      - 
+    - MarsRoverMissionLoader which contain everything to do with loading the mission file
+      - I'd also separate out the execution of missions from the loading. Currently, rovers execute their mission as soon as the parameters are set in the constructor, I'd add a separate executeMission method, only.
+  - Use this refactoring to create a separate MarsRoverConsoleApp using existing functionality
+  - It would also make testing much easier
+- The app has minimal error checking atm on, loaded data - I'd add a lot more.
 
 # Future expansions:
 ## give the Plateaus class a height map and obstacles

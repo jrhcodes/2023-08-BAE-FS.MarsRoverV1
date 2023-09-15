@@ -1,0 +1,12 @@
+ROVER COMMAND SEQUENCE TEST FILE
+Command Sequence, expected to be valid? true = yes false = no
+L, true
+R, true
+, false
+X, false
+<, false
+M, true
+LMRMRLMRLRMLRMLRMLRM, true
+?LRMRLMRLRMRLMRLMRLM, false
+LMRMRLMRLRMLRMLRMLR?, false
+LMRMRLMRLRMLR?LRMLRM, false

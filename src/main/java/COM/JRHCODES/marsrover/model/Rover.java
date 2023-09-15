@@ -23,9 +23,16 @@ public class Rover {
         return pose;
     }
 
-    public boolean validCommands(String commands) {
-        return commands.chars().allMatch(ch -> commandSet.indexOf(ch) != -1);
+    public static boolean isValidCommandSequence(String commands) {
+        return commands!=null
+                && !commands.isEmpty()
+                && commands.chars().allMatch(ch -> commandSet.indexOf(ch) != -1);
     }
+
+    public static boolean isValidCommand(char command) {
+        return command != 0 && commandSet.indexOf(command) != -1;
+    }
+
 
     public Point getPosition(int step) {
         if (step < path.length) {

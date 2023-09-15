@@ -11,14 +11,14 @@ public class RoverTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = {"RoverNegativePathTest.csv", "RoverPathTest.csv"}, numLinesToSkip = 2)
-    public void testGetCommandSequence(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
+    public void testGetCommandSequence(int initX, int initY, CompassDirection initDir, String commands) {
         Rover rover = new Rover(initX, initY, initDir, commands);
         assertEquals(commands, rover.getCommandSequence());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"RoverNegativePathTest.csv", "RoverPathTest.csv"}, numLinesToSkip = 2)
-    public void testRoverPathX(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
+    public void testRoverPathX(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY) {
         Rover rover = new Rover(initX, initY, initDir, commands);
         Pose finalPose = rover.getPose();
         assertEquals(finalX, finalPose.getX());
@@ -42,13 +42,12 @@ public class RoverTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "RoverPathTest.csv", numLinesToSkip = 2)
-    public void testRoverPathStaysWithin1x1Plateau(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
+    public void testRoverPathStaysWithin1x1Plateau(int initX, int initY, CompassDirection initDir, String commands) {
         Rover rover = new Rover(initX, initY, initDir, commands);
         Pose finalPose = rover.getPose();
         if (initX == 0 && initY == 0 && ("LR".contains(commands))) {
             assertTrue(rover.pathStaysWithinPlateau(new Plateau(1, 1)));
         } else {
-
             assertFalse(rover.pathStaysWithinPlateau(new Plateau(1, 1)));
         }
 
@@ -56,7 +55,7 @@ public class RoverTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "RoverPathTest.csv", numLinesToSkip = 2)
-    public void testRoverPathStaysWithin10x10Plateau(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
+    public void testRoverPathStaysWithin10x10Plateau(int initX, int initY, CompassDirection initDir, String commands) {
         Rover rover = new Rover(initX, initY, initDir, commands);
         assertTrue(rover.pathStaysWithinPlateau(new Plateau(10, 10)));
     }
@@ -66,5 +65,16 @@ public class RoverTest {
     public void testRoverPathStaysWithin10x10PlateauNegativePath(int initX, int initY, CompassDirection initDir, String commands, int finalX, int finalY, CompassDirection finalDir) {
         Rover rover = new Rover(initX, initY, initDir, commands);
         assertFalse(rover.pathStaysWithinPlateau(new Plateau(10, 10)));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "RoverCommandSetTest.csv", numLinesToSkip = 2)
+    public void testRoverCommandSequenceIsValid(String commandSequence, boolean expected ) {
+        assertEquals(expected, Rover.isValidCommandSequence(commandSequence));
+    }
+    @ParameterizedTest
+    @CsvFileSource(resources = "RoverCommandTest.csv", numLinesToSkip = 2)
+    public void testRoverCommandIsValid(char command, boolean expected ) {
+        assertEquals(expected, Rover.isValidCommand(command));
     }
 }

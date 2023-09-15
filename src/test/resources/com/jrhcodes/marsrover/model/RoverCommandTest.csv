@@ -1,0 +1,7 @@
+ROVER COMMAND TEST FILE
+Command, expected to be valid? true = yes false = no
+L, true
+R, true
+X, false
+<, false
+M, true

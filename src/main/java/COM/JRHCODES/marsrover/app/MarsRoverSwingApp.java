@@ -100,7 +100,7 @@ public class MarsRoverSwingApp {
             try {
                 FileInputStream fileInputStream = new FileInputStream(selectedFile);
                 byte[] data = new byte[(int) selectedFile.length()];
-                int read = fileInputStream.read(data);
+                fileInputStream.read(data);
                 fileInputStream.close();
 
                 buffer = new String(data, StandardCharsets.UTF_8);
