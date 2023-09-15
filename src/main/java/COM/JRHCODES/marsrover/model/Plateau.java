@@ -1,6 +1,6 @@
-package com.jrhcodes.model;
+package com.jrhcodes.marsrover.model;
 
-import com.jrhcodes.spatialmath.Point;
+import com.jrhcodes.marsrover.spatialmath.Point;
 
 public class Plateau {
     private static final Point origin = new Point(0, 0);

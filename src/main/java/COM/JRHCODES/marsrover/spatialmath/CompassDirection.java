@@ -1,4 +1,4 @@
-package com.jrhcodes.spatialmath;
+package com.jrhcodes.marsrover.spatialmath;
 
 import java.util.HashMap;
 import java.util.Map;

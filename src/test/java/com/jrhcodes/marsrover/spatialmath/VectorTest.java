@@ -1,5 +1,7 @@
-package com.jrhcodes.spatialmath;
+package com.jrhcodes.marsrover.spatialmath;
 
+import com.jrhcodes.marsrover.spatialmath.Point;
+import com.jrhcodes.marsrover.spatialmath.Vector;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 

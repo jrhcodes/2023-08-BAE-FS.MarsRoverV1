@@ -1,8 +1,8 @@
-package com.jrhcodes.model;
+package com.jrhcodes.marsrover.model;
 
-import com.jrhcodes.spatialmath.CompassDirection;
-import com.jrhcodes.spatialmath.Point;
-import com.jrhcodes.spatialmath.Pose;
+import com.jrhcodes.marsrover.spatialmath.CompassDirection;
+import com.jrhcodes.marsrover.spatialmath.Point;
+import com.jrhcodes.marsrover.spatialmath.Pose;
 
 import java.util.Arrays;
 
@@ -49,7 +49,7 @@ public class Rover {
                 case "M" ->
                         this.pose = new Pose(this.pose.getDirection().getVector().applyCopy(this.pose.getPosition()), this.pose.getDirection());
                 default ->
-                        throw new IllegalArgumentException("Unknown command in command sequence:'%s'".formatted(commandString));
+                        throw new IllegalArgumentException("Unknown command '%s' at position %d in command sequence:'%s'".formatted(commands[i], i, commandString));
             }
             path[i + 1] = this.pose;
         }

@@ -1,4 +1,4 @@
-package com.jrhcodes.swingutils;
+package com.jrhcodes.marsrover.swingutils;
 
 import javax.swing.*;
 import javax.swing.text.Document;

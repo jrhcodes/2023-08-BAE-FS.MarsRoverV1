@@ -1,4 +1,4 @@
-package com.jrhcodes.spatialmath;
+package com.jrhcodes.marsrover.spatialmath;
 
 public class Pose {
     private final Point position;

@@ -1,11 +1,13 @@
-package com.jrhcodes.app;
 
-import com.jrhcodes.model.MarsMission;
-import com.jrhcodes.model.Plateau;
-import com.jrhcodes.model.Rover;
-import com.jrhcodes.spatialmath.CompassDirection;
-import com.jrhcodes.spatialmath.Pose;
-import com.jrhcodes.swingutils.JTextAreaWithPrintf;
+
+package com.jrhcodes.marsrover.app;
+
+import com.jrhcodes.marsrover.model.MarsMission;
+import com.jrhcodes.marsrover.model.Plateau;
+import com.jrhcodes.marsrover.model.Rover;
+import com.jrhcodes.marsrover.spatialmath.CompassDirection;
+import com.jrhcodes.marsrover.spatialmath.Pose;
+import com.jrhcodes.marsrover.swingutils.JTextAreaWithPrintf;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -18,14 +20,14 @@ import java.nio.charset.StandardCharsets;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
-public class MarsRoverApp {
+public class MarsRoverSwingApp {
     private final JFrame frame;
     private final JButton executeButton;
     private final JTextAreaWithPrintf textArea;
     String fileBuffer = null;
     private JScrollPane missionTablePane = null;
 
-    public MarsRoverApp() {
+    public MarsRoverSwingApp() {
         frame = new JFrame("Mars Rover App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -57,7 +59,7 @@ public class MarsRoverApp {
     }
 
     public static void main(String[] args) {
-        invokeLater(MarsRoverApp::new);
+        invokeLater(MarsRoverSwingApp::new);
     }
 
     private String openFile() {
@@ -97,7 +99,7 @@ public class MarsRoverApp {
 
             try {
                 FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                byte[] data = new byte[(int) selectedFile.length()+1];
+                byte[] data = new byte[(int) selectedFile.length()];
                 int read = fileInputStream.read(data);
                 fileInputStream.close();
 
@@ -122,7 +124,7 @@ public class MarsRoverApp {
 
     MarsMission parseFileBuffer(String buffer) {
 
-        final String[] fileLines = buffer.split("\r\n");
+        final String[] fileLines = buffer.split("\r?\n");
 
         final String[] firstLine = fileLines[0].split(" ");
         final int plateauX = Integer.parseInt(firstLine[0]);

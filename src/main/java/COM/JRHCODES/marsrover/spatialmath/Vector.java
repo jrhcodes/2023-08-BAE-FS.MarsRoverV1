@@ -1,4 +1,4 @@
-package com.jrhcodes.spatialmath;
+package com.jrhcodes.marsrover.spatialmath;
 
 public class Vector extends Point {
     public Vector(int x, int y) {

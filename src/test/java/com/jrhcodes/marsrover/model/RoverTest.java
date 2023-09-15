@@ -1,7 +1,7 @@
-package com.jrhcodes.model;
+package com.jrhcodes.marsrover.model;
 
-import com.jrhcodes.spatialmath.CompassDirection;
-import com.jrhcodes.spatialmath.Pose;
+import com.jrhcodes.marsrover.spatialmath.CompassDirection;
+import com.jrhcodes.marsrover.spatialmath.Pose;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 

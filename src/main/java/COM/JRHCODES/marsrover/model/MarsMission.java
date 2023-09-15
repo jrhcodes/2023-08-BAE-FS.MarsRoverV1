@@ -1,4 +1,4 @@
-package com.jrhcodes.model;
+package com.jrhcodes.marsrover.model;
 
 public class MarsMission {
 

@@ -128,6 +128,9 @@ Contains a series of ordered pairs with which to test the Point class constructo
 #### TestVectorValues
 Contains a series of coordinates, vector x and y values and the result of applying the vector to the ordered pair. 
 
+# What I didn't have time for
+- Refactoring the may app into a main app class and utility classes for most side functionality.
+
 # Future expansions:
 ## give the Plateaus class a height map and obstacles
 - for an n x m Plateau, there would be an n x m array, each element (x,y) showing the relative height of the location.
@@ -157,7 +160,6 @@ Contains a series of coordinates, vector x and y values and the result of applyi
 - routes could be optimised in terms of time taken or fuel usage
 - extensions to the route finding could add the ability to give each vehicle multiple waypoints, which they must visit to complete their mission
 - if orders such as take photo or collect sample were added to vehicle capabilities, orders at the various waypoints could be specified - e.g. collect a sample at 2,3
-
 
 # Acknowledgements
 I'd like to thank Tech Returners for their assistance on the course and especially Simon Morgan and Chris Ward, course tutors for the Java section of the course. 
