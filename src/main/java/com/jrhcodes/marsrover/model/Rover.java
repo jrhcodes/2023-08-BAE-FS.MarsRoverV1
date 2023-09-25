@@ -19,12 +19,8 @@ public class Rover {
         executeMission();
     }
 
-    public Pose getPose() {
-        return pose;
-    }
-
     public static boolean isValidCommandSequence(String commands) {
-        return commands!=null
+        return commands != null
                 && !commands.isEmpty()
                 && commands.chars().allMatch(ch -> commandSet.indexOf(ch) != -1);
     }
@@ -33,6 +29,9 @@ public class Rover {
         return command != 0 && commandSet.indexOf(command) != -1;
     }
 
+    public Pose getPose() {
+        return pose;
+    }
 
     public Point getPosition(int step) {
         if (step < path.length) {

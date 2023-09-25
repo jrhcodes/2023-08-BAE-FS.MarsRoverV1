@@ -69,12 +69,13 @@ public class RoverTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "RoverCommandSetTest.csv", numLinesToSkip = 2)
-    public void testRoverCommandSequenceIsValid(String commandSequence, boolean expected ) {
+    public void testRoverCommandSequenceIsValid(String commandSequence, boolean expected) {
         assertEquals(expected, Rover.isValidCommandSequence(commandSequence));
     }
+
     @ParameterizedTest
     @CsvFileSource(resources = "RoverCommandTest.csv", numLinesToSkip = 2)
-    public void testRoverCommandIsValid(char command, boolean expected ) {
+    public void testRoverCommandIsValid(char command, boolean expected) {
         assertEquals(expected, Rover.isValidCommand(command));
     }
 }

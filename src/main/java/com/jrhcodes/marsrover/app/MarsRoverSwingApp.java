@@ -1,13 +1,11 @@
-
-
 package com.jrhcodes.marsrover.app;
 
 import com.jrhcodes.marsrover.model.MarsMission;
 import com.jrhcodes.marsrover.model.Plateau;
+import com.jrhcodes.marsrover.model.Rover;
 import com.jrhcodes.marsrover.spatialmath.CompassDirection;
 import com.jrhcodes.marsrover.spatialmath.Pose;
 import com.jrhcodes.marsrover.swingutils.JTextAreaWithPrintf;
-import com.jrhcodes.marsrover.model.Rover;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
