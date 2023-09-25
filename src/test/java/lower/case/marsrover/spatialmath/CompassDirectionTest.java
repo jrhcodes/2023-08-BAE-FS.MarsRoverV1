@@ -1,5 +1,6 @@
 package com.jrhcodes.marsrover.spatialmath;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -10,8 +11,8 @@ public class CompassDirectionTest {
     @ParameterizedTest
     @CsvFileSource(resources = "TestCompassDirectionValues.csv", numLinesToSkip = 2)
     public void getVectorTest(CompassDirection compassDirection, int x, int y, int sx, int sy, int rx, int ry) {
-        assertEquals(compassDirection.getVector().getX(), x);
-        assertEquals(compassDirection.getVector().getY(), y);
+        Assertions.assertEquals(compassDirection.getVector().getX(), x);
+        Assertions.assertEquals(compassDirection.getVector().getY(), y);
     }
 
     @ParameterizedTest

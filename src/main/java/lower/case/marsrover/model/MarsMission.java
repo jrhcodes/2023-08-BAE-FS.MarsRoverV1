@@ -2,33 +2,33 @@ package com.jrhcodes.marsrover.model;
 
 public class MarsMission {
 
-    private final Plateau plateau;
-    private final Rover[] rovers;
+    private final com.jrhcodes.marsrover.model.Plateau plateau;
+    private final com.jrhcodes.marsrover.model.Rover[] rovers;
 
-    public MarsMission(Plateau plateau, int numberOfRovers) {
+    public MarsMission(com.jrhcodes.marsrover.model.Plateau plateau, int numberOfRovers) {
         this.plateau = plateau;
-        rovers = new Rover[numberOfRovers];
+        rovers = new com.jrhcodes.marsrover.model.Rover[numberOfRovers];
     }
 
-    public void addRover(Rover rover, int index) {
+    public void addRover(com.jrhcodes.marsrover.model.Rover rover, int index) {
         rovers[index] = rover;
     }
 
-    public Rover getRover(int index) {
+    public com.jrhcodes.marsrover.model.Rover getRover(int index) {
         return rovers[index];
     }
 
-    public Rover[] getRovers() {
+    public com.jrhcodes.marsrover.model.Rover[] getRovers() {
         return rovers;
     }
 
-    public Plateau getPlateau() {
+    public com.jrhcodes.marsrover.model.Plateau getPlateau() {
         return plateau;
     }
 
     public boolean isCollisionAtStep(int roverIndex, int step) {
 
-        Rover theRover = getRover(roverIndex);
+        com.jrhcodes.marsrover.model.Rover theRover = getRover(roverIndex);
 
         for (int otherRoverIndex = 0; otherRoverIndex < rovers.length; otherRoverIndex++) {
             if (otherRoverIndex != roverIndex && theRover.hasCollidedWith(getRover(otherRoverIndex), step)) {
@@ -40,7 +40,7 @@ public class MarsMission {
 
     public int findLongestRoverPath() {
         int longestPath = 0;
-        for (Rover rover : rovers) {
+        for (com.jrhcodes.marsrover.model.Rover rover : rovers) {
             int pathLength = rover.getPath().length;
             if (pathLength > longestPath) {
                 longestPath = pathLength;

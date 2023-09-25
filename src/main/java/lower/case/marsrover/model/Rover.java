@@ -71,7 +71,7 @@ public class Rover {
         return "%d %d %s".formatted(position.getX(), position.getY(), pose.getDirection().name());
     }
 
-    public boolean pathStaysWithinPlateau(Plateau plateau) {
+    public boolean pathStaysWithinPlateau(com.jrhcodes.marsrover.model.Plateau plateau) {
         return Arrays.stream(this.path).allMatch(pose -> plateau.contains(pose.getPosition()));
     }
 

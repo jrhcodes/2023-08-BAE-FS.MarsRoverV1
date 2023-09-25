@@ -23,10 +23,10 @@ public enum CompassDirection {
         rightTurns.put(CompassDirection.W, CompassDirection.N);
     }
 
-    private final Vector vector;
+    private final com.jrhcodes.marsrover.spatialmath.Vector vector;
 
     CompassDirection(int x, int y) {
-        this.vector = new Vector(x, y);
+        this.vector = new com.jrhcodes.marsrover.spatialmath.Vector(x, y);
     }
 
     public CompassDirection leftOf() {
@@ -37,11 +37,11 @@ public enum CompassDirection {
         return rightTurns.get(this);
     }
 
-    public Vector getVector() {
+    public com.jrhcodes.marsrover.spatialmath.Vector getVector() {
         return vector;
     }
 
-    public Point moveCopy(Point point) {
+    public com.jrhcodes.marsrover.spatialmath.Point moveCopy(com.jrhcodes.marsrover.spatialmath.Point point) {
         return vector.applyCopy(point);
     }
 

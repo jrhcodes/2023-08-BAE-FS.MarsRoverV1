@@ -1,10 +1,10 @@
 package com.jrhcodes.marsrover.spatialmath;
 
 public class Pose {
-    private final Point position;
-    private final CompassDirection compassDirection;
+    private final com.jrhcodes.marsrover.spatialmath.Point position;
+    private final com.jrhcodes.marsrover.spatialmath.CompassDirection compassDirection;
 
-    public Pose(Point position, CompassDirection compassDirection) {
+    public Pose(com.jrhcodes.marsrover.spatialmath.Point position, com.jrhcodes.marsrover.spatialmath.CompassDirection compassDirection) {
         this.position = position;
         this.compassDirection = compassDirection;
     }
@@ -13,19 +13,19 @@ public class Pose {
         return new Pose(compassDirection.getVector().applyCopy(position), this.compassDirection);
     }
 
-    public CompassDirection left() {
+    public com.jrhcodes.marsrover.spatialmath.CompassDirection left() {
         return compassDirection.leftOf();
     }
 
-    public CompassDirection right() {
+    public com.jrhcodes.marsrover.spatialmath.CompassDirection right() {
         return compassDirection.rightOf();
     }
 
-    public Point getPosition() {
+    public com.jrhcodes.marsrover.spatialmath.Point getPosition() {
         return position;
     }
 
-    public CompassDirection getDirection() {
+    public com.jrhcodes.marsrover.spatialmath.CompassDirection getDirection() {
         return compassDirection;
     }
 

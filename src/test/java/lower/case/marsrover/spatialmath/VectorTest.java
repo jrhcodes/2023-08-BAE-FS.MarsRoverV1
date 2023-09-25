@@ -1,8 +1,8 @@
 package com.jrhcodes.marsrover.spatialmath;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class VectorTest {
@@ -10,13 +10,13 @@ public class VectorTest {
     @ParameterizedTest
     @CsvFileSource(resources = "TestPointValues.csv", numLinesToSkip = 2)
     public void getXTest(int x, int y) {
-        assertEquals((new Vector(x, y)).getX(), x);
+        Assertions.assertEquals((new Vector(x, y)).getX(), x);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "TestPointValues.csv", numLinesToSkip = 2)
     public void getYTest(int x, int y) {
-        assertEquals((new Vector(x, y)).getY(), y);
+        Assertions.assertEquals((new Vector(x, y)).getY(), y);
     }
 
     @ParameterizedTest
