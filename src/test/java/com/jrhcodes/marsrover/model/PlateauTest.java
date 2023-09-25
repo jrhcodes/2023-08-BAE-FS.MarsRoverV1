@@ -18,7 +18,7 @@ public class PlateauTest {
         assertEquals(y, topRight.getY());
     }
     @ParameterizedTest
-    @CsvSource({"0,0", "-1,0", "0, -1",
+    @CsvSource({"0,0", "1,0", "0, -1",
                 "1,-1", "-1, 1", "-1000,1000", "1000,-1000" })
     public void constructorInvalidTest(int x, int y) {
         assertThrows(IllegalArgumentException.class,  () -> new Plateau(x, y));
