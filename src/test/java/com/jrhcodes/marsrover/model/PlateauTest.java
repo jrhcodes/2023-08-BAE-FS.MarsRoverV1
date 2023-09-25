@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlateauTest {
     @ParameterizedTest
-    @CsvSource({"0,0", "1,0", "0, 1", "1000,1000" })
+    @CsvSource({"19,10", "10,1", "10, 1", "1000,1000" })
     public void constructorTest(int x, int y) {
         Plateau plateau = new Plateau(x, y);
         Point topRight = plateau.getTopRight();
