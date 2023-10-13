@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import static java.lang.System.*;
 import static javax.swing.SwingUtilities.invokeLater;
 
 public class MarsRoverSwingApp {
@@ -26,6 +27,7 @@ public class MarsRoverSwingApp {
     private JScrollPane missionTablePane = null;
 
     public MarsRoverSwingApp() {
+        System.out.println("Starting!");
         frame = new JFrame("Mars Rover App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

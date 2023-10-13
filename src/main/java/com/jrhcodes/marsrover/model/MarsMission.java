@@ -1,13 +1,16 @@
 package com.jrhcodes.marsrover.model;
+import  com.jrhcodes.marsrover.model.Plateau;
+import  com.jrhcodes.marsrover.model.Rover;
+import java.lang.reflect.Array;
 
 public class MarsMission {
 
-    private final com.jrhcodes.marsrover.model.Plateau plateau;
-    private final com.jrhcodes.marsrover.model.Rover[] rovers;
+    private Plateau plateau;
+    private Rover[] rovers;
 
-    public MarsMission(com.jrhcodes.marsrover.model.Plateau plateau, int numberOfRovers) {
+    public MarsMission(Plateau plateau, int numberOfRovers) {
         this.plateau = plateau;
-        rovers = new com.jrhcodes.marsrover.model.Rover[numberOfRovers];
+        rovers = new Rover[numberOfRovers];
     }
 
     public void addRover(com.jrhcodes.marsrover.model.Rover rover, int index) {
