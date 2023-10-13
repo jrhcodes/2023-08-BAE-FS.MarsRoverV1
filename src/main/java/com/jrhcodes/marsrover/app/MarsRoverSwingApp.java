@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import static java.lang.System.*;
 import static javax.swing.SwingUtilities.invokeLater;
 
 public class MarsRoverSwingApp {

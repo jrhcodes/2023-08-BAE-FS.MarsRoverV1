@@ -59,9 +59,6 @@ public class Rover {
             }
             path[i + 1] = this.pose;
         }
-
-        this.pose.getX();
-        this.pose.getY();
     }
 
     @Override
