@@ -148,7 +148,7 @@ Contains a series of coordinates, vector x and y values and the result of applyi
 
 # Future expansions:
 ## give the Plateaus class a height map and obstacles
-- for an n x m Plateau, there would be an n x m array, each element (x,y) showing the relative height of the location.
+- for an n x m Plateau, there would be an n x m array, each element (x,y) showing the relative height of the location. This approach could also be used to map plateaus of different shapes, by blocking out areas not available within the rectangular plateau, with obstacles used to mark the edge of the non-rectangular plateau.
 - where the difference in heights between two locations is above a threshold value, a rover would not be able to traverse the terrain between the two and the mission would fail.
 ## fuel cells
 - each order processed by a rover would consume different amounts of energy from the rover's battery. 
@@ -175,6 +175,11 @@ Contains a series of coordinates, vector x and y values and the result of applyi
 - routes could be optimised in terms of time taken or fuel usage
 - extensions to the route finding could add the ability to give each vehicle multiple waypoints, which they must visit to complete their mission
 - if orders such as take photo or collect sample were added to vehicle capabilities, orders at the various waypoints could be specified - e.g. collect a sample at 2,3
+## Multistage Missions
+Allow a mission to be extended with a MultiStage mission class:
+- used to maintain and collect together multiple MarsMission objects, each of which would be a stage in a larger mission.
+- data input for the initial mission stage would be the same as currently but other missions would not include starting positions for extant rovers
+- allow rovers to be added or removed from the surface at each stage
 
 # Acknowledgements
 I'd like to thank Tech Returners for their assistance on the course and especially Simon Morgan and Chris Ward, course tutors for the Java section of the course. 
